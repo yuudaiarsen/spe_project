@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+   http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
+    <servlet>
+        <servlet-name>WelcomePage</servlet-name>
+        <servlet-class>ru.ikbo1018.servlets.MainPageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>WelcomePage</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+        <jsp-property-group>
+            <url-pattern>*.css</url-pattern>
+            <default-content-type>text/css</default-content-type>
+        </jsp-property-group>
+        <jsp-property-group>
+            <url-pattern>*.css</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+    <session-config>
+        <session-timeout>1440</session-timeout>
+        <cookie-config>
+            <name>ikbo1018_id</name>
+            <http-only>true</http-only>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <location>/errors/temp.html</location>
+    </error-page>
+</web-app>

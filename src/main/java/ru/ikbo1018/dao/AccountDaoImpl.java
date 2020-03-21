@@ -21,6 +21,9 @@ public class AccountDaoImpl implements AccountDao {
     //language=SQL
     private static final String SQL_FIND_BY_EMAIL = "SELECT * FROM accounts WHERE email = ?;";
 
+    //language=SQL
+    private static final String SQL_INSERT = "INSERT INTO accounts VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?);";
+
 
     public List<Account> findAll() throws SQLException {
 
@@ -37,6 +40,7 @@ public class AccountDaoImpl implements AccountDao {
                     resultSet.getString("email"),
                     resultSet.getString("password"),
                     resultSet.getInt("sec_level"),
+                    resultSet.getString("phone"),
                     resultSet.getDate("reg_date")
             ));
         }
@@ -57,11 +61,21 @@ public class AccountDaoImpl implements AccountDao {
         return new Account(resultSet.getInt("id"), resultSet.getString("first_name"),
                 resultSet.getString("last_name"), resultSet.getString("mid_name"),
                 resultSet.getString("email"), resultSet.getString("password"), resultSet.getInt("sec_level"),
-                resultSet.getDate("reg_date"));
+                resultSet.getString("phone"),  resultSet.getDate("reg_date"));
     }
 
-    public void create(Account model) {
+    public void create(Account model) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
+        statement.setString(1, model.getFirstName());
+        statement.setString(2, model.getLastName());
+        statement.setString(3, model.getMidName());
+        statement.setString(4, model.getEmail());
+        statement.setString(5, model.getPassword());
+        statement.setInt(6, model.getSecLevel());
+        statement.setString(7, model.getPhone());
+        statement.setDate(8, model.getRegDate());
 
+        statement.execute();
     }
 
     public void update(Account model) {

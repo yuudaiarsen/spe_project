@@ -1,0 +1,25 @@
+/registration
+
+##required parameters:
+
+first_name
+last_name
+mid_name
+email
+password
+phone
+
+##returns:
+
+#status 200:
+
+redirect - адрес перенаправления, аккаунт создан
+
+#status 400:
+
+error - Текст ошибки, можно передавать пользователю
+code - код ошибки
+
+#status 503:
+
+Произошла ошибка при обработке запроса

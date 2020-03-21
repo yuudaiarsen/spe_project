@@ -10,9 +10,10 @@ public class Account {
     private String email;
     private String password;
     private int secLevel;
+    private String phone;
     private Date regDate;
 
-    public Account(int id, String firstName, String lastName, String midName, String email, String password, int secLevel, Date regDate) {
+    public Account(int id, String firstName, String lastName, String midName, String email, String password, int secLevel, String phone, Date regDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +21,18 @@ public class Account {
         this.email = email;
         this.password = password;
         this.secLevel = secLevel;
+        this.phone = phone;
+        this.regDate = regDate;
+    }
+
+    public Account(String firstName, String lastName, String midName, String email, String password, int secLevel, String phone, Date regDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.midName = midName;
+        this.email = email;
+        this.password = password;
+        this.secLevel = secLevel;
+        this.phone = phone;
         this.regDate = regDate;
     }
 
@@ -29,6 +42,14 @@ public class Account {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getFirstName() {
