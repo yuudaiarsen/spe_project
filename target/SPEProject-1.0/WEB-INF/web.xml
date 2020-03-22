@@ -7,6 +7,7 @@
     <servlet>
         <servlet-name>WelcomePage</servlet-name>
         <servlet-class>ru.ikbo1018.servlets.MainPageServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
@@ -42,7 +43,5 @@
         <welcome-file>index</welcome-file>
     </welcome-file-list>
 
-    <error-page>
-        <location>/errors/temp.html</location>
-    </error-page>
+
 </web-app>

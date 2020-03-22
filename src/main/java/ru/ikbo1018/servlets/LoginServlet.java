@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
             {
                 resp.setStatus(HttpServletResponse.SC_OK);
                 req.getSession().setAttribute("auth", Boolean.TRUE);
+                req.getSession().setAttribute("account_id", account.getId());
                 Map<String, String> res = new HashMap<String, String>();
                 res.put("redirect", "/lk");
                 resp.getWriter().print(new Gson().toJson(res));
@@ -41,7 +42,7 @@ public class LoginServlet extends HttpServlet {
             }
         }catch (SQLException e)
         {
-            e.printStackTrace();
+            resp.sendError(503);
         }
     }
 }

@@ -50,8 +50,7 @@ public class RegistrationServlet extends HttpServlet {
                 {
                     accountDao.create(new Account(firstName, lastName, midName, email, password, 0, phone, new Date(System.currentTimeMillis())));
                     resp.setStatus(200);
-                    req.getSession().setAttribute("auth", Boolean.TRUE);
-                    response.put("redirect", "/lk");
+                    response.put("redirect", "/index");
                     resp.getWriter().print(new Gson().toJson(response));
                 }
                 else
