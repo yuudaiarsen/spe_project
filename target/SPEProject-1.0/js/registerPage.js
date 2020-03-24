@@ -4,21 +4,22 @@ function showError(error) {
     document.getElementById('warning').style.display = 'inline-block';
 }
 
-$('#login_button').click(function () {
-    document.getElementById('warning').style.display = 'none';
+function send() {
     $.ajax({
-        url: '/login',
+        url: '/registration',
         type: 'post',
         data: {
+            'first_name': $('#first_name').val(),
+            'last_name': $('#last_name').val(),
+            'mid_name': $('#mid_name').val(),
+            'phone': $('#phone').val(),
             'email': $('#email').val(),
             'password': $('#password').val()
         },
-        success: function (data, status) {
+        success: function (data, status, xhr) {
             if(data.redirect) {
                 window.document.location = data.redirect;
-            }
-            else
-            {
+            } else {
                 showError(data.error);
             }
         },
@@ -26,8 +27,8 @@ $('#login_button').click(function () {
             showError("Ошибка #" + xhr.status);
         }
     });
-});
+}
 
-$('#register_button').click(function () {
-    window.document.location = '/registration';
-});
+document.getElementById('email').onfocus = function() {
+    document.getElementById('warning').style.display = 'none';
+}

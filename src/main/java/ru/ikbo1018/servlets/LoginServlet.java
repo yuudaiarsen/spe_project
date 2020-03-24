@@ -24,6 +24,7 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+
         try {
             AccountDao accountDao = new AccountDaoImpl();
             Account account = accountDao.findByEmail(email);
@@ -38,7 +39,10 @@ public class LoginServlet extends HttpServlet {
             }
             else
             {
-                resp.sendError(400);
+                resp.setStatus(200);
+                Map<String, String> res = new HashMap<String, String>();
+                res.put("error", "Неверный логин или пароль");
+                resp.getWriter().print(new Gson().toJson(res));
             }
         }catch (SQLException e)
         {

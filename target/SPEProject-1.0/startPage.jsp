@@ -9,16 +9,17 @@
 	<%@ include file="header.jsp"%>
 	<section id="main">
 		<div class="container">
-			<div class="main clearfix">
+			<div class="main">
 				<div class="login_form">
 					<div class="fields">
-						<input type="text" id="email" placeholder="Почтовый адрес" size="35"><br>
-						<input type="password" id="password" placeholder="Пароль" size="35">
+						<input type="text" id="email" name="email" placeholder="Адрес электронной почты" size="35"><br>
+						<input type="password" id="password" name="password" placeholder="Пароль" size="35">
 					</div>
+					<div id="warning"></div>
 					<div class="buttons">
-						<input id="login_button" class="button" value="Вход" type="submit" name="submit">
+						<input class="button" id="login_button" value="Вход" type="submit" name="login_button">
 						<p>или</p>
-						<button id="register_button" class="button">Регистрация</button>
+						<button class="button" id="register_button" name="register_button">Регистрация</button>
 					</div>
 				</div>
 				<div class="about">

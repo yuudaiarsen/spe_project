@@ -20,6 +20,11 @@ import com.google.gson.*;
 public class RegistrationServlet extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/registration/registration.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json;charset=UTF-8");
         String firstName = req.getParameter("first_name");
@@ -34,7 +39,7 @@ public class RegistrationServlet extends HttpServlet {
         if (firstName.length() == 0 || lastName.length() == 0 || email.length() == 0
                 || password.length() == 0)
         {
-            resp.setStatus(400);
+            resp.setStatus(200);
             response.put("error", "Обязательные поля должны быть заполнены");
             response.put("code", "1");
             resp.getWriter().print(new Gson().toJson(response));
@@ -55,7 +60,7 @@ public class RegistrationServlet extends HttpServlet {
                 }
                 else
                 {
-                    resp.setStatus(400);
+                    resp.setStatus(200);
                     response.put("error", "Аккаунт с указанным адресом электронной почты уже существует");
                     response.put("code", "2");
                     resp.getWriter().print(new Gson().toJson(response));
