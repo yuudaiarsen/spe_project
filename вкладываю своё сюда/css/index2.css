@@ -2,13 +2,23 @@ body {
 	font-family: Arial, sans-serif;
 	padding: 0;
 	margin: 0;
+	display: flex;
+  	flex-direction: column;
+  	min-height: 100vh;
+  	justify-content: space-between;
+
 }
 
 div {
 	box-sizing: border-box;
 }
 
+section {
+	flex: 1;
+}
+
 header h2 {
+	margin-left: 20px;
 	margin-top: 35px;
 	float: left;
 	font-size: 30px;
@@ -29,6 +39,7 @@ header {
 }
 
 #main {
+/*	margin-bottom: auto;*/
 	background-color: #ECEDF1;
 }
 
@@ -123,10 +134,16 @@ nav {
 	padding-left: 10px;
 }
 
+@media (max-width: 1000px) {
+
+	.container {
+		width: 100%;
+	}
+}
+
 footer {
 	font-size: 14px;
 	text-align: center;
-	padding-top: 150px;
 }
 
 /* {
