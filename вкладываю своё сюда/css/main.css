@@ -85,16 +85,12 @@ nav {
 	order: -1;
 	width: 50%;
 	margin: 20px;
-/*	float: left;*/
-/*	text-align: left;*/
-/*	width: 50%;*/
 }
 
 .login_form { 
 	flex: 1;
 	margin: 20px;
 	text-align: center;
-/*	float: right;*/
 	background-color: #f7f7f7;
 }
 

@@ -1,0 +1,56 @@
+======Appeal page======
+
+Поля формы:
+
+- type (Тип нарушения)
+- address (Адрес нарушения)
+- appeal_text (Комментарии заявителя)
+- submit (Кнопка отправки)
+
+
+Тип нарушения выбирается из выпадающего списка с элементами, которые переданы с сервера.
+Код формирования списка:
+
+<select id="types">
+        <% for(Type type : (List<Type>)request.getAttribute("type_list"))
+        {
+            out.print("<option value=" + type.getId() + ">" + type.getName() + "</option>");
+        }
+        %>
+</select>
+
+При выборе типа должно появляться его описание.
+Код получения описания по выбранному нарушению:
+
+$('#types').change(function () {
+    $.ajax({
+        url: '/appeal',
+        type: 'post',
+        data: {
+            'value': $('#types').val()
+        },
+        success: function (data, status) {
+            // вывод самого описания (data.desc).
+        },
+        error: function(data, status) {
+        	// уведомление об ошибке
+        }
+    });
+});
+
+Форма запроса для корректной обработки должна быть составлена на основе:
+
+<form method="post" action="/appeal" enctype="multipart/form-data">
+        <input type="text" name="appeal_text">
+        <select id="types" name="type">
+            <% for(Type type : (List<Type>)request.getAttribute("type_list"))
+            {
+                out.print("<option value=" + type.getId() + ">" + type.getName() + "</option>");
+            }
+            %>
+        </select>
+        <input type="file" name="files" multiple>
+        <input type="submit">
+</form>
+
+При успехе вернется data.redirect. При ошибке вернется data.error, который необходимо вывести пользователю.
