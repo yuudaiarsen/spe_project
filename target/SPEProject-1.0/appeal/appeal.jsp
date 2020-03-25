@@ -9,7 +9,7 @@
     <div id="description"></div>
 
     <form method="post" action="/appeal" enctype="multipart/form-data">
-        Имя: <input type="text" name="appeal_text">
+        <input type="text" name="appeal_text">
         <select id="types" name="type">
             <% for(Type type : (List<Type>)request.getAttribute("type_list"))
             {
@@ -17,7 +17,7 @@
             }
             %>
         </select>
-        Файлы: <input type="file" name="files" multiple>
+        <input type="file" name="files" multiple>
         <input type="submit">
     </form>
     <script src="/js/appealPage.js"></script>

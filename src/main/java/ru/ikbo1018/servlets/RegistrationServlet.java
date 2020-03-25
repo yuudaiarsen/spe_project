@@ -27,9 +27,9 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json;charset=UTF-8");
-        String firstName = req.getParameter("first_name");
-        String lastName = req.getParameter("last_name");
-        String midName = req.getParameter("mid_name");
+        String firstName = req.getParameter("first_name").toLowerCase();
+        String lastName = req.getParameter("last_name").toLowerCase();
+        String midName = req.getParameter("mid_name").toLowerCase();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String phone = req.getParameter("phone");

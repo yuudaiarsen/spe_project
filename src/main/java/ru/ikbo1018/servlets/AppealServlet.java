@@ -71,13 +71,11 @@ public class AppealServlet extends HttpServlet {
                 }catch (NumberFormatException e)
                 {
                     resp.sendError(400);
-                    return;
                 }
                 catch(SQLException e)
                 {
                     resp.sendError(503);
                     //e.printStackTrace();
-                    return;
                 }
             }
 

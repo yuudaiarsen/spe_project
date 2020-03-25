@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public interface CrudDao<T> {
     void create(T model) throws SQLException;
-    void update(T model);
+    void update(T model) throws SQLException;
     void delete(Integer id);
     T find(Integer id);
 }

@@ -24,6 +24,12 @@ public class AccountDaoImpl implements AccountDao {
     //language=SQL
     private static final String SQL_INSERT = "INSERT INTO accounts VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?);";
 
+    //language=SQL
+    private static final String SQL_FIND_BY_ID = "SELECT * FROM accounts WHERE id = ?;";
+
+    //language=SQL
+    private static final String SQL_UPDATE_FIELD_BY_ID = "UPDATE accounts SET `?` = ? WHERE id = ?;";
+
 
     public List<Account> findAll() throws SQLException {
 
@@ -47,7 +53,22 @@ public class AccountDaoImpl implements AccountDao {
         return result;
     }
 
-    public Account findById(int id) {
+    public Account findById(int id) throws SQLException{
+        PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_ID);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        if(resultSet.next())
+        {
+            return new Account(resultSet.getInt("id"),
+                    resultSet.getString("first_name"),
+                    resultSet.getString("last_name"),
+                    resultSet.getString("mid_name"),
+                    resultSet.getString("email"),
+                    resultSet.getString("password"),
+                    resultSet.getInt("sec_level"),
+                    resultSet.getString("phone"),
+                    resultSet.getDate("reg_date"));
+        }
         return null;
     }
 
@@ -64,6 +85,15 @@ public class AccountDaoImpl implements AccountDao {
                 resultSet.getString("phone"),  resultSet.getDate("reg_date"));
     }
 
+    @Override
+    public void updateField(String field, String data, int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(
+                "UPDATE accounts SET " + field + " = ? WHERE id = ?;");
+        statement.setString(1, data);
+        statement.setInt(2, id);
+        statement.execute();
+    }
+
     public void create(Account model) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
         statement.setString(1, model.getFirstName());
@@ -78,7 +108,7 @@ public class AccountDaoImpl implements AccountDao {
         statement.execute();
     }
 
-    public void update(Account model) {
+    public void update(Account model) throws SQLException{
 
     }
 

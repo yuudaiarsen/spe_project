@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface AccountDao extends CrudDao<Account> {
     List<Account> findAll() throws SQLException;
-    Account findById(int id);
+    Account findById(int id) throws SQLException;
     Account findByEmail(String email) throws SQLException;
+    void updateField(String field, String data, int id) throws SQLException;
 }

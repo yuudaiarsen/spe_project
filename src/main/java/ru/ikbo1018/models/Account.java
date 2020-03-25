@@ -13,6 +13,11 @@ public class Account {
     private String phone;
     private Date regDate;
 
+    public Account()
+    {
+
+    }
+
     public Account(int id, String firstName, String lastName, String midName, String email, String password, int secLevel, String phone, Date regDate) {
         this.id = id;
         this.firstName = firstName;
