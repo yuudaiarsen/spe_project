@@ -32,7 +32,6 @@ public final class StatusStringController {
             Status status = statusDao.findById(code);
             if(status != null)
             {
-                System.out.println(status.getDesc());
                 return status.getDesc();
             }
         }catch (SQLException e)

@@ -125,12 +125,23 @@ public class AppealServlet extends HttpServlet {
                 else if(part.getName().equals("appeal_text"))
                 {
                     scanner = new Scanner(part.getInputStream());
-                    appeal_text = scanner.nextLine();
+                    if(scanner.hasNextLine())
+                        appeal_text = scanner.nextLine();
                 }
                 else if(part.getName().equals("address"))
                 {
                     scanner = new Scanner(part.getInputStream());
-                    address = scanner.nextLine();
+                    if(scanner.hasNextLine())
+                    {
+                        address = scanner.nextLine();
+                    }
+                    else
+                    {
+                        result.put("code", "4");
+                        result.put("error", "Заполните обязательные поля");
+                        resp.getWriter().print(new Gson().toJson(result));
+                        return;
+                    }
                 }
             }
 
