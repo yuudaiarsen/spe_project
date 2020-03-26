@@ -151,7 +151,7 @@ public class AppealServlet extends HttpServlet {
                 Appeal appeal = new Appeal();
                 appeal.setAccountId(account_id);
                 appeal.setSendDate(new Date(System.currentTimeMillis()));
-                appeal.setStatus(Appeal.APPEAL_STATUS_WAIT);
+                appeal.setStatus(1);
                 appeal.setAppealText(appeal_text);
                 appeal.setAddress(address);
                 appeal.setType(Integer.parseInt(type));
@@ -164,7 +164,7 @@ public class AppealServlet extends HttpServlet {
                     imageDao.create(img);
                 }
 
-                result.put("redirect", "/index");
+                result.put("redirect", "/lk");
                 resp.getWriter().print(new Gson().toJson(result));
             }catch (SQLException e)
             {

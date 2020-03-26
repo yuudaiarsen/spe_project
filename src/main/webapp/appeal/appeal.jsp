@@ -11,8 +11,8 @@
     <section id="main">
 		<div class="container">
 			<form id="form" enctype="multipart/form-data">
+				Выберите нарушение:
         		<select form="form" id="types" name="type" required>
-        			<option>Выберите нарушение</option>
             		<% for(Type type : (List<Type>)request.getAttribute("type_list"))
             		{
                 		out.print("<option value=" + type.getId() + ">" + type.getName() + "</option>");

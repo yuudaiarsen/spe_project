@@ -14,9 +14,6 @@ public class Appeal {
     private String address;
     private int type;
 
-    public static final Integer APPEAL_STATUS_WAIT = 0;
-    public static final Integer APPEAL_STATUS_CHECKED = 1;
-
     public Appeal()
     {
 

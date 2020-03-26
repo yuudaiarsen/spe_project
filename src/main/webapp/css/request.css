@@ -122,10 +122,6 @@ footer {
 	text-align: center;
 }
 
-* {
-	border: solid red 1px;
-}
-
 .files::-webkit-file-upload-button {
   visibility: hidden;
   width: 170px;
