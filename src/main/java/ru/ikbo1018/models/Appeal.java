@@ -17,6 +17,24 @@ public class Appeal {
     public static final Integer APPEAL_STATUS_WAIT = 0;
     public static final Integer APPEAL_STATUS_CHECKED = 1;
 
+    public Appeal()
+    {
+
+    }
+
+    public Appeal(int id, int accountId, Date sendDate, int status, Date checkDate, int operatorId, String appealText, String answerText, String address, int type) {
+        this.id = id;
+        this.accountId = accountId;
+        this.sendDate = sendDate;
+        this.status = status;
+        this.checkDate = checkDate;
+        this.operatorId = operatorId;
+        this.appealText = appealText;
+        this.answerText = answerText;
+        this.address = address;
+        this.type = type;
+    }
+
     public Integer getId() {
         return id;
     }

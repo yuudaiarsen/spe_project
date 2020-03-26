@@ -37,3 +37,27 @@ $('button').click(function () {
         })
     }
 });
+
+var currPage = 0;
+
+function downloadNewPage()
+{
+    $.ajax({
+        url: '/lk',
+        type: 'post',
+        enctype: 'utf-8',
+        data: {
+            'page': currPage,
+        },
+        success: function (data, status) {
+            // вывод ссылок на обращения ('/view?id=' + data[i].id)
+        },
+        error: function (xhr, textStatus, errorThrown)  {
+            // показать ошибку
+        }
+    });
+}
+
+$(document).ready(function () {
+    downloadNewPage();
+});
