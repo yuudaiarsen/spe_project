@@ -3,6 +3,13 @@ function showMessage(message) {
     $('#warning').append(message);
 }
 
+function showError(message) {
+    $('#error_field').empty();
+    $('#error_field').append(message);
+    document.getElementById('error_field').style.display = 'block';
+    $("#error_field").fadeOut(2000);
+}
+
 function update()
 {
     $.ajax({
@@ -15,11 +22,11 @@ function update()
             if (data.desc) {
                 showMessage(data.desc);
             } else {
-                showMessage(data.error);
+                showError(data.error);
             }
         },
         error: function (xhr, textStatus, errorThrown)  {
-            showMessage("Ошибка #" + xhr.status);
+            showError("Ошибка #" + xhr.status);
         }
     });
 }
@@ -34,7 +41,7 @@ form.addEventListener('submit', onSubmit);
 // submit_button request
 function onSubmit(event) {
     var formData = new FormData($("#form")[0]);
-    formData.append('address', 'нет');
+    // formData.append('address', 'нет');
     $.ajax({
         url: '/appeal',
         type: 'post',
@@ -45,11 +52,11 @@ function onSubmit(event) {
             if (data.redirect) {
                 window.document.location = data.redirect;
             } else {
-                showMessage(data.error);
+                showError(data.error);
             }
         },
         error: function (xhr, textStatus, errorThrown)  {
-            showMessage("Ошибка #" + xhr.status);
+            showError("Ошибка #" + xhr.status);
         }
     });
     event.preventDefault();
