@@ -31,6 +31,12 @@ public class AppealServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getSession().getAttribute("auth") != Boolean.TRUE)
+        {
+            resp.sendRedirect("/index");
+            return;
+        }
+
         TypeDao typeDao = new TypeDaoImpl();
         List<Type> types;
         //StringBuilder list = new StringBuilder();
@@ -82,6 +88,8 @@ public class AppealServlet extends HttpServlet {
             String type = req.getParameter("type"); // тип нарушения
             String address = req.getParameter("address");
             String appeal_text = req.getParameter("appeal_text");
+
+            System.out.println(type + "  " + address + "   " + appeal_text);
 
             if(type == null || address == null || appeal_text == null)
             {

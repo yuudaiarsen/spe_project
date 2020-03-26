@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
 	<title>Название</title>
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<script src="/js/jquery-3.4.1.min.js"></script>
