@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" href="css/request.css">
     <script src="/js/jquery-3.4.1.min.js"></script>
-
+    <meta charset="UTF-8">
 </head>
 <body>
     <%@include file="/header.jsp"%>

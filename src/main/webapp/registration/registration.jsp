@@ -20,7 +20,7 @@
                 <div class="fields">
                     <input type="text" name="first_name" id="first_name" placeholder="Имя" pattern="[a-zA-ZА-Яа-я]+" size="25" required><br>
                     <input type="text" name="last_name" id="last_name" placeholder="Фамилия" pattern="[А-Яа-яa-zA-Z]+" size="25" required><br>
-                    <input type="text" name="mid_name" id="mid_name" placeholder="Отчество" pattern="[А-Яа-яa-zA-Z]+" size="25"><br>
+                    <input type="text" name="mid_name" id="mid_name" placeholder="Отчество" pattern="[А-Яа-яa-zA-Z]+" size="25" ><br>
                     <input type="text" name="phone" id="phone" placeholder="Телефон" title="От 10 до 12 цифр без разделителей" pattern="^[\+]?[1-9][0-9]{9,11}$" size="25"><br>
                     <input type="email" name="email" id="email" placeholder="Почтовый адрес" size="25" required><div id="warning"></div><br>
                     <input type="password" id="password" placeholder="Пароль" title="Минимум 8 символов"  pattern=".{8,}" size="25" required>

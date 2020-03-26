@@ -19,10 +19,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @WebServlet("/appeal")
@@ -85,25 +82,16 @@ public class AppealServlet extends HttpServlet {
                 }
             }
 
-            String type = req.getParameter("type"); // тип нарушения
-            String address = req.getParameter("address");
-            String appeal_text = req.getParameter("appeal_text");
-
-            System.out.println(type + "  " + address + "   " + appeal_text);
-
-            if(type == null || address == null || appeal_text == null)
-            {
-                resp.sendError(400);
-                return;
-            }
-
             ArrayList<Part> images = new ArrayList<Part>();
+            String type = "";
+            String address = "";
+            String appeal_text = "";
+            Scanner scanner;
 
             for(Part part : req.getParts())
             {
                 if(part.getName().equals("files") && part.getSize() > 0) {
                     if (part.getSize() > 10 * 1024 * 1024) {
-                        resp.setStatus(200);
                         result.put("code", "1");
                         result.put("error", "Размер изображения не может быть больше 10 Мб");
                         resp.getWriter().print(new Gson().toJson(result));
@@ -115,7 +103,6 @@ public class AppealServlet extends HttpServlet {
                     if ( !urlPattern.matcher(part.getSubmittedFileName()).matches()
                             && !jpgPattern.matcher(part.getSubmittedFileName()).matches()
                             && !jpegPattern.matcher(part.getSubmittedFileName()).matches()){
-                        resp.setStatus(200);
                         result.put("code", "2");
                         result.put("error", "Неверный тип загружаемого файла");
                         resp.getWriter().print(new Gson().toJson(result));
@@ -124,13 +111,33 @@ public class AppealServlet extends HttpServlet {
                     images.add(part);
                     if(images.size() > 5)
                     {
-                        resp.setStatus(200);
                         result.put("code", "3");
                         result.put("error", "Нельзя загрузить более чем 5 изображений");
                         resp.getWriter().print(new Gson().toJson(result));
                         return;
                     }
                 }
+                else if(part.getName().equals("type"))
+                {
+                    scanner = new Scanner(part.getInputStream());
+                    type = scanner.nextLine();
+                }
+                else if(part.getName().equals("appeal_text"))
+                {
+                    scanner = new Scanner(part.getInputStream());
+                    appeal_text = scanner.nextLine();
+                }
+                else if(part.getName().equals("address"))
+                {
+                    scanner = new Scanner(part.getInputStream());
+                    address = scanner.nextLine();
+                }
+            }
+
+            if (type.length() == 0 || address.length() == 0)
+            {
+                resp.sendError(400);
+                return;
             }
 
             try {

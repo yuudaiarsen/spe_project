@@ -34,10 +34,10 @@ form.addEventListener('submit', onSubmit);
 // submit_button request
 function onSubmit(event) {
     var formData = new FormData($("#form")[0]);
+    formData.append('address', 'нет');
     $.ajax({
         url: '/appeal',
         type: 'post',
-        enctype: 'utf-8',
         contentType: false,
         processData: false,
         data: formData,
