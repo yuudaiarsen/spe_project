@@ -10,4 +10,5 @@ public interface AppealDao extends CrudDao<Appeal> {
     Appeal findById(int id) throws SQLException;
     List<Appeal> findAllByAccountId(int id) throws SQLException;
     List<Appeal> findInRangeByAccountId(int id, int start, int end) throws SQLException;
+    void updateColumnIntById(int id, String column, int newVal) throws SQLException;
 }

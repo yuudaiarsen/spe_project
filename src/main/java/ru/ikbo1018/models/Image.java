@@ -12,6 +12,14 @@ public class Image {
         this.data = data;
     }
 
+    public Image(int id, int appeal_id, InputStream data) {
+        this.id = id;
+        this.appeal_id = appeal_id;
+        this.data = data;
+    }
+
+    public Image(){}
+
     public Integer getId() {
         return id;
     }
