@@ -35,6 +35,22 @@ header {
     display: flex;
 }
 
+.btns {
+    margin-top: 10px;
+    width: 200px;
+
+}
+
+.prev {
+    float: left;
+    padding: 5px;
+}
+
+.next {
+    padding: 5px;
+    float: right;
+}
+
 .clearfix:after {
     content:'';
     display: table;
@@ -77,13 +93,14 @@ nav {
     margin: 0 auto;
 }
 
-.references {
+.references, .list {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
 }
+
 
 .information {
     width: 50%;
@@ -146,6 +163,6 @@ footer {
     text-align: center;
 }
 
-* {
+/* {
     border: solid red 1px;
 }

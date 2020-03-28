@@ -3,7 +3,15 @@ function showMessage(message) {
     $('#warning').append(message);
 }
 
-$('#types').change(function () {
+function showError(message) {
+    $('#error_field').empty();
+    $('#error_field').append(message);
+    document.getElementById('error_field').style.display = 'block';
+    $("#error_field").fadeOut(2000);
+}
+
+function update()
+{
     $.ajax({
         url: '/appeal',
         type: 'post',
@@ -14,13 +22,17 @@ $('#types').change(function () {
             if (data.desc) {
                 showMessage(data.desc);
             } else {
-                showMessage(data.error);
+                showError(data.error);
             }
         },
         error: function (xhr, textStatus, errorThrown)  {
-            showMessage("Ошибка #" + xhr.status);
+            showError("Ошибка #" + xhr.status);
         }
     });
+}
+
+$('#types').change(function () {
+    update();
 });
 
 const form = document.getElementById('form');
@@ -29,22 +41,28 @@ form.addEventListener('submit', onSubmit);
 // submit_button request
 function onSubmit(event) {
     var formData = new FormData($("#form")[0]);
+    // formData.append('address', 'нет');
     $.ajax({
         url: '/appeal',
         type: 'post',
+        contentType: false,
         processData: false,
         data: formData,
         success: function (data, status, xhr) {
             if (data.redirect) {
                 window.document.location = data.redirect;
             } else {
-                showMessage(data.error);
+                showError(data.error);
             }
         },
         error: function (xhr, textStatus, errorThrown)  {
-            showMessage("Ошибка #" + xhr.status);
+            showError("Ошибка #" + xhr.status);
         }
     });
     event.preventDefault();
 }
 
+$(document).ready(function() {
+        update();
+    }
+);
