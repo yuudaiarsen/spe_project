@@ -15,7 +15,6 @@ $(document).ready(function () {
                 'id': new URLSearchParams(window.location.search).get('id')
             },
             success: function (data, status) {
-                showMessage(data.message, "black");
                 window.location.reload(false);
             },
             error: function (xhr, textStatus, errorThrown) {

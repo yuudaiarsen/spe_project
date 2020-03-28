@@ -18,6 +18,10 @@
                     <p>Тип нарушения: ${type}</p>
                     <p>Статус: ${status}</p>
                     <p>Адрес: ${appeal.address}</p>
+                    <% if(appeal.getStatus() == 2){
+                       out.print("<p>Ответ оператора: " + appeal.getAnswerText() + "</p>");
+                       out.print("<p>Дата ответа: " + appeal.getCheckDate() + "</p>");
+                    }%>
                     <h1>Материалы</h1>
                 </div>
                 <div class="info_image">
