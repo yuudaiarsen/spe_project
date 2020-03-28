@@ -82,10 +82,9 @@ function downloadNewPage() {
             for (var i = 0; i < 10; i++) {
                 if (data[i]) {
     				var ref = document.createElement('a');
-    				var br = document.createElement('br');
     				ref.setAttribute('href','/view?id=' + data[i].id);
     				ref.innerHTML = "Заявление"+(i+1);
-    				$('#references').append(br, ref);
+    				$('#references').append(ref);
                 } else {
                     return false;
                 }

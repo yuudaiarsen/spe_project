@@ -1,0 +1,56 @@
+======view======
+
+- Страница просмотра обращения содержит информацию об обращении, которая передается объектом appeal.
+
+Поля объекта appeal:
+
+id - номер обращения
+send_date - дата подачи
+address - адресс
+check_date - дата проверки
+answer_text - текст ответа
+appeal_text - текст обращения
+
+- Тип нарушения выводится через поле type:
+${type}
+
+- Статус выводится с помощью поля status:
+${status}
+
+- Должна располагаться кнопка, чтобы отозвать обращение, если обращение ожидает рассмотрения. Проверка с помощью кода:
+
+<% if(appeal.getStatus() == 1) {
+        out.print("<button>КНОПКА</button>");
+}
+%>
+
+- id кнопки - 'deny'
+
+- По нажатии на кнопку выполняется код:
+
+$(document).ready(function () {
+        $('#deny').click(function () {
+            $.ajax({
+                url: '/view',
+                type: 'post',
+                data: {
+                    'action': 'deny',
+                    'id': new URLSearchParams(window.location.search).get('id')
+                },
+                success: function (data, status) {
+                    // вывести ответное сообщение message
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // показать ошибку
+                }
+            });
+        })
+    });
+
+Вывод картинок с помощью кода (до 5 картинок): 
+
+<% for(Integer id : (List<Integer>)request.getAttribute("images"))
+    {
+        out.print("<img src=/image?id=" + id + " />");
+    }
+%>
