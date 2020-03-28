@@ -90,26 +90,28 @@ public class AppealViewServlet extends HttpServlet {
             Map<String, String> result = new HashMap<String, String>();
             if(appeal == null)
             {
-                resp.sendError(400);
+                resp.setStatus(400);
                 return;
             }
             if(action.equals("deny")) {
                 if(appeal.getStatus() != 1)
                 {
-                    resp.sendError(400);
+                    resp.setStatus(400);
                     return;
                 }
+                resp.setContentType("text/json");
+                resp.setCharacterEncoding("utf-8");
                 appealDao.updateColumnIntById(appeal.getId(), "status", 3);
                 result.put("message", "Обращение успешно отозвано");
                 resp.getWriter().print(new Gson().toJson(result));
             }
         }catch (NumberFormatException e)
         {
-            resp.sendError(400);
+            resp.setStatus(400);
         }
         catch (SQLException e)
         {
-            resp.sendError(503);
+            resp.setStatus(503);
             e.printStackTrace();
         }
     }

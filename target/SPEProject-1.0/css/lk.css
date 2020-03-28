@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+
+}
+
+section {
+    flex: 1;
+}
+
+header h2 {
+    margin-left: 20px;
+    margin-top: 35px;
+    float: left;
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;;
+}
+
+header {
+    height: 100px;
+    background-color: #1E90FF;
+}
+
+#main {
+    background-color: #ECEDF1;
+}
+
+#main .container {
+    display: flex;
+}
+
+.clearfix:after {
+    content:'';
+    display: table;
+    width: 100%;
+    clear: both;
+}
+
+nav {
+    float: right;
+    margin-top: 40px;
+}
+
+.menu {
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.menu li {
+    float: left;
+    display: block;
+    margin-right: 41px;
+    font-size: 14px
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.references a {
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.references {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.information {
+    width: 50%;
+}
+
+form div {
+    display: inline-block;
+    /*  align-items: center;
+        flex-direction: column;
+        justify-content: space-between;*/
+}
+
+label {
+    width: 140px;
+    float: left;
+    text-align: right;
+    line-height: 35px;
+}
+
+form input {
+    padding: 10px;
+    margin-left: 15px;
+}
+
+form .buttons {
+    margin-left: 140px;
+}
+
+form div {
+    margin-top: 10px;
+}
+
+#error_field {
+    width: 300px;
+    display: none;
+    margin: 10px auto;
+}
+
+#warning {
+    width: 300px;
+    display: none;
+    margin: 10px auto;
+}
+
+@media (max-width: 1000px) {
+
+    .container {
+        width: 100%;
+    }
+
+    #main .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+footer {
+    font-size: 14px;
+    text-align: center;
+}
