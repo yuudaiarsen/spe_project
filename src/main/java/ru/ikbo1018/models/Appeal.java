@@ -5,9 +5,9 @@ import java.sql.Date;
 public class Appeal {
     private int id;
     private int accountId;
-    private Date sendDate;
+    private String sendDate;
     private int status;
-    private Date checkDate;
+    private String checkDate;
     private int operatorId;
     private String appealText;
     private String answerText;
@@ -19,7 +19,7 @@ public class Appeal {
 
     }
 
-    public Appeal(int id, int accountId, Date sendDate, int status, Date checkDate, int operatorId, String appealText, String answerText, String address, int type) {
+    public Appeal(int id, int accountId, String sendDate, int status, String checkDate, int operatorId, String appealText, String answerText, String address, int type) {
         this.id = id;
         this.accountId = accountId;
         this.sendDate = sendDate;
@@ -48,11 +48,11 @@ public class Appeal {
         this.accountId = accountId;
     }
 
-    public Date getSendDate() {
+    public String getSendDate() {
         return sendDate;
     }
 
-    public void setSendDate(Date sendDate) {
+    public void setSendDate(String sendDate) {
         this.sendDate = sendDate;
     }
 
@@ -64,11 +64,11 @@ public class Appeal {
         this.status = status;
     }
 
-    public Date getCheckDate() {
+    public String getCheckDate() {
         return checkDate;
     }
 
-    public void setCheckDate(Date checkDate) {
+    public void setCheckDate(String checkDate) {
         this.checkDate = checkDate;
     }
 

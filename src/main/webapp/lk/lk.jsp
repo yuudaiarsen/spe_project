@@ -20,7 +20,7 @@
                         <label for="midName_field">Отчество:</label><input required type="text" pattern="[A-Za-zА-Яа-я]+" id="midName_field" value="${account.midName}">
                     </div>
                     <div class="phone">
-                        <label for="phone_field">Номер телефона:</label><input type="tel" pattern="[0-9]{8,12}" id="phone_field" value="${account.phone}">
+                        <label for="phone_field">Номер телефона:</label><input type="tel" pattern="[0-9]{0,12}" id="phone_field" value="${account.phone}">
                     </div>
                     <div class="email">
                         <label for="email_field">Email:</label><input type="text" disabled="disabled" id="email_field" value="${account.email}">

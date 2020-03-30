@@ -3,6 +3,8 @@ package ru.ikbo1018.servlets;
 import ru.ikbo1018.dao.AccountDao;
 import ru.ikbo1018.dao.AccountDaoImpl;
 import ru.ikbo1018.models.Account;
+import ru.ikbo1018.models.Appeal;
+import ru.ikbo1018.storage.AppealController;
 import ru.ikbo1018.storage.DataBaseController;
 
 import javax.servlet.ServletException;
@@ -24,6 +26,7 @@ public class MainPageServlet extends HttpServlet {
             DataBaseController dataBaseController = DataBaseController.getInstance(
                     getServletContext().getRealPath("/WEB-INF/classes/db.properties")
             );
+            AppealController appealController = AppealController.getInstance();
         }catch (IOException e)
         {
             e.printStackTrace();

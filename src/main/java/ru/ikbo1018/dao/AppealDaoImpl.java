@@ -23,6 +23,9 @@ public class AppealDaoImpl implements AppealDao {
     //language=SQL
     private static final String SQL_FIND_BY_ACCOUNT_ID_IN_RANGE = "SELECT * FROM appeal WHERE account_id = ? LIMIT ?,?;";
 
+    //language=SQL
+    private static final String SQL_FIND_BY_STATUS = "SELECT * FROM appeal WHERE status = ?;";
+
     private Connection connection;
 
     public AppealDaoImpl()
@@ -37,9 +40,9 @@ public class AppealDaoImpl implements AppealDao {
         Integer operatorId = model.getOperatorId();
 
         statement.setInt(1, model.getAccountId());
-        statement.setDate(2, model.getSendDate());
+        statement.setString(2, model.getSendDate());
         statement.setInt(3, model.getStatus());
-        statement.setDate(4, model.getSendDate());
+        statement.setString(4, model.getSendDate());
         if(operatorId > 0)
             statement.setInt(5, operatorId);
         else
@@ -84,8 +87,8 @@ public class AppealDaoImpl implements AppealDao {
         ResultSet resultSet = statement.executeQuery();
         if(resultSet.next())
         {
-            return new Appeal(resultSet.getInt("id"), resultSet.getInt("account_id"), resultSet.getDate("send_date"),
-                    resultSet.getInt("status"), resultSet.getDate("check_date"), resultSet.getInt("operator_id"),
+            return new Appeal(resultSet.getInt("id"), resultSet.getInt("account_id"), resultSet.getString("send_date"),
+                    resultSet.getInt("status"), resultSet.getString("check_date"), resultSet.getInt("operator_id"),
                     resultSet.getString("appeal_text"), resultSet.getString("answer_text"), resultSet.getString("address"),
                     resultSet.getInt("type_id"));
         }
@@ -100,8 +103,8 @@ public class AppealDaoImpl implements AppealDao {
         List<Appeal> result = new ArrayList<Appeal>();
         while (resultSet.next())
         {
-            result.add(new Appeal(resultSet.getInt("id"), resultSet.getInt("account_id"), resultSet.getDate("send_date"),
-                    resultSet.getInt("status"), resultSet.getDate("check_date"), resultSet.getInt("operator_id"),
+            result.add(new Appeal(resultSet.getInt("id"), resultSet.getInt("account_id"), resultSet.getString("send_date"),
+                    resultSet.getInt("status"), resultSet.getString("check_date"), resultSet.getInt("operator_id"),
                     resultSet.getString("appeal_text"), resultSet.getString("answer_text"), resultSet.getString("address"),
                     resultSet.getInt("type_id")));
         }
@@ -118,8 +121,8 @@ public class AppealDaoImpl implements AppealDao {
         List<Appeal> result = new ArrayList<Appeal>();
         while (resultSet.next())
         {
-            result.add(new Appeal(resultSet.getInt("id"), resultSet.getInt("account_id"), resultSet.getDate("send_date"),
-                    resultSet.getInt("status"), resultSet.getDate("check_date"), resultSet.getInt("operator_id"),
+            result.add(new Appeal(resultSet.getInt("id"), resultSet.getInt("account_id"), resultSet.getString("send_date"),
+                    resultSet.getInt("status"), resultSet.getString("check_date"), resultSet.getInt("operator_id"),
                     resultSet.getString("appeal_text"), resultSet.getString("answer_text"), resultSet.getString("address"),
                     resultSet.getInt("type_id")));
         }
@@ -132,5 +135,21 @@ public class AppealDaoImpl implements AppealDao {
         statement.setInt(1, newVal);
         statement.setInt(2, id);
         statement.execute();
+    }
+
+    @Override
+    public List<Appeal> findAllByStatus(int status) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_STATUS);
+        statement.setInt(1, status);
+        ResultSet resultSet = statement.executeQuery();
+        List<Appeal> result = new ArrayList<Appeal>();
+        while (resultSet.next())
+        {
+            result.add(new Appeal(resultSet.getInt("id"), resultSet.getInt("account_id"), resultSet.getString("send_date"),
+                    resultSet.getInt("status"), resultSet.getString("check_date"), resultSet.getInt("operator_id"),
+                    resultSet.getString("appeal_text"), resultSet.getString("answer_text"), resultSet.getString("address"),
+                    resultSet.getInt("type_id")));
+        }
+        return result;
     }
 }

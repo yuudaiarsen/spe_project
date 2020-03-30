@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import ru.ikbo1018.dao.*;
 import ru.ikbo1018.models.Appeal;
 import ru.ikbo1018.models.Image;
+import ru.ikbo1018.storage.AppealController;
 import ru.ikbo1018.storage.StatusStringController;
 
 import javax.servlet.ServletException;
@@ -13,10 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet("/view")
 public class AppealViewServlet extends HttpServlet {
@@ -102,6 +100,7 @@ public class AppealViewServlet extends HttpServlet {
                 resp.setContentType("text/json");
                 resp.setCharacterEncoding("utf-8");
                 appealDao.updateColumnIntById(appeal.getId(), "status", 3);
+                AppealController.getInstance().remove(appeal.getId());
                 result.put("message", "Обращение успешно отозвано");
                 resp.getWriter().print(new Gson().toJson(result));
             }
