@@ -13,6 +13,7 @@ public final class AppealController {
 
     private static AppealController appealController;
     private static PriorityQueue<Appeal> queue;
+    private static Map<Integer, Long> currWatching;
 
 
     private AppealController()
@@ -30,6 +31,7 @@ public final class AppealController {
         };
 
         queue = new PriorityQueue<Appeal>( comparator);
+        currWatching = new HashMap<>();
         loadAppeals();
     }
 
@@ -88,5 +90,46 @@ public final class AppealController {
                 queue.remove(appeal);
             }
         }
+    }
+    public void checked(int appeal_id)
+    {
+        currWatching.remove(appeal_id);
+        update();
+    }
+
+    private void update()
+    {
+        Date currTime = new Date();
+        AppealDao appealDao = new AppealDaoImpl();
+        ArrayList<Appeal> tmp_add = new ArrayList<>();
+        currWatching.forEach((k, v) -> {
+            if(currTime.getTime() - v > 15 * 60 * 1000)
+            {
+                try {
+                    tmp_add.add(appealDao.findById(k));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        for(Appeal appeal : tmp_add)
+        {
+            currWatching.remove(appeal.getId());
+            addAppeal(appeal);
+        }
+    }
+
+    public Appeal get()
+    {
+        update();
+        Appeal result = queue.poll();
+        if(result != null){
+            currWatching.put(result.getId(), new Date().getTime());
+        }
+        else
+        {
+            return null;
+        }
+        return result;
     }
 }

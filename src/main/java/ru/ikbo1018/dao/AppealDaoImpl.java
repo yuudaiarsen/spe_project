@@ -152,4 +152,12 @@ public class AppealDaoImpl implements AppealDao {
         }
         return result;
     }
+
+    @Override
+    public void updateColumnStringById(int id, String column, String newVal) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE appeal SET `" + column + "` = ? WHERE id = ?;");
+        statement.setString(1, newVal);
+        statement.setInt(2, id);
+        statement.execute();
+    }
 }
