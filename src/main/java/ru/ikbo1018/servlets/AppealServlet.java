@@ -38,15 +38,12 @@ public class AppealServlet extends HttpServlet {
 
         TypeDao typeDao = new TypeDaoImpl();
         List<Type> types;
-        //StringBuilder list = new StringBuilder();
         try {
             types = typeDao.findAll();
             req.setAttribute("type_list", types);
         }catch (SQLException e)
         {
             resp.sendError(503);
-            //e.printStackTrace();
-            return;
         }
 
         req.getRequestDispatcher("/appeal/appeal.jsp").forward(req, resp);

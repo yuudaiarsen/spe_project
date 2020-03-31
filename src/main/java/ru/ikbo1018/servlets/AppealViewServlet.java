@@ -38,7 +38,7 @@ public class AppealViewServlet extends HttpServlet {
         try {
             AppealDao appealDao = new AppealDaoImpl();
             Appeal appeal = appealDao.findById(Integer.parseInt(id));
-            if(appeal == null || !appeal.getAccountId().equals(account_id))
+            if(appeal == null || (!appeal.getAccountId().equals(account_id) && new AccountDaoImpl().findById(account_id).getSecLevel() < 2))
             {
                 resp.sendError(400);
                 return;
