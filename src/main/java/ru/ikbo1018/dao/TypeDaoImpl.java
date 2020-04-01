@@ -17,6 +17,12 @@ public class TypeDaoImpl implements TypeDao {
     //language=SQL
     private static final String SQL_FIND_DESC_BY_ID = "SELECT `desc` FROM types WHERE `id` = ?;";
 
+    //language=SQL
+    private static final String SQL_INSERT = "INSERT INTO types VALUES (DEFAULT, ?, ?);";
+
+    //language=SQL
+    private static final String SQL_DELETE = "DELETE FROM types WHERE id = ?;";
+
     private Connection connection;
 
     public TypeDaoImpl()
@@ -26,7 +32,10 @@ public class TypeDaoImpl implements TypeDao {
 
     @Override
     public void create(Type model) throws SQLException {
-
+        PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
+        statement.setString(1, model.getName());
+        statement.setString(2, model.getDesc());
+        statement.execute();
     }
 
     @Override
@@ -35,8 +44,10 @@ public class TypeDaoImpl implements TypeDao {
     }
 
     @Override
-    public void delete(Integer id) {
-
+    public void delete(Integer id) throws SQLException{
+        PreparedStatement statement = connection.prepareStatement(SQL_DELETE);
+        statement.setInt(1, id);
+        statement.execute();
     }
 
     @Override

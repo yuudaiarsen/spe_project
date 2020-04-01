@@ -8,6 +8,7 @@ import ru.ikbo1018.dao.TypeDaoImpl;
 import ru.ikbo1018.models.Appeal;
 import ru.ikbo1018.models.Image;
 import ru.ikbo1018.models.Type;
+import ru.ikbo1018.storage.AppealController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,8 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -36,15 +38,12 @@ public class AppealServlet extends HttpServlet {
 
         TypeDao typeDao = new TypeDaoImpl();
         List<Type> types;
-        //StringBuilder list = new StringBuilder();
         try {
             types = typeDao.findAll();
             req.setAttribute("type_list", types);
         }catch (SQLException e)
         {
             resp.sendError(503);
-            //e.printStackTrace();
-            return;
         }
 
         req.getRequestDispatcher("/appeal/appeal.jsp").forward(req, resp);
@@ -161,13 +160,15 @@ public class AppealServlet extends HttpServlet {
                 AppealDaoImpl appealDao = new AppealDaoImpl();
                 Appeal appeal = new Appeal();
                 appeal.setAccountId(account_id);
-                appeal.setSendDate(new Date(System.currentTimeMillis()));
+                appeal.setSendDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 appeal.setStatus(1);
                 appeal.setAppealText(appeal_text);
                 appeal.setAddress(address);
                 appeal.setType(Integer.parseInt(type));
                 appealDao.create(appeal);
                 int newId = appealDao.getMaxId();
+                appeal.setId(newId);
+                AppealController.getInstance().addAppeal(appeal);
 
                 for(Image img : res_images)
                 {

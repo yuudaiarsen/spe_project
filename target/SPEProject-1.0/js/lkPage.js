@@ -1,13 +1,26 @@
 const form = document.getElementById('form');
 var elements = form.elements;
+var currPage = 0;
 form.addEventListener('reset', onReset);
 form.addEventListener('submit', onSubmit);
 
-//Сохранение информации о пользователе в массиве
-data = [${account.firstName},${account.lastName},${account.midName},
-    ${account.phone},${account.email},${account.regDate}];
+data = [];
 
-// data = ["и","ф","о","12345678","почта","дата"];
+$('#prev').click(function () {
+    currPage--;
+    downloadNewPage();
+});
+
+$('#next').click(function () {
+    currPage++;
+    downloadNewPage();
+});
+
+function setData() {
+    for (var i = 0; i < 6; i++) {
+        data.push(elements[i].value);
+    }
+}
 
 function setFields () {
     $('#firstName_field').val(data[0]);
@@ -38,16 +51,16 @@ function onReset(event) {
 function onSubmit(event) {
     for (var i = 0; i < 6; i++) {
         if (elements[i].value != data[i]) {
-            console.log("inside");
-            request(elements[i].id, elements[i].value, i);
+            if (request(elements[i].id, elements[i].value)) {
+                data[i] = elements[i].value;
+            }
         }
     }
     setFields();
     event.preventDefault();
 }
 
-function request(id, newValue, i) {
-
+function request(id, newValue) {
     $.ajax({
         url: '/lk',
         type: 'post',
@@ -59,35 +72,67 @@ function request(id, newValue, i) {
         success: function (data, status) {
             if (data.desc) {
                 showMessage(data.message);
+                return true;
             } else {
                 showError(data.error);
+                return false;
             }
         },
         error: function (xhr, textStatus, errorThrown)  {
             showError("Ошибка #" + xhr.status);
-            // $('#' + id).val(data[i]);
+            return false;
         }
     });
 }
 
-function downloadNewPage() {
+// Проверяет, существует ли следующая страница
+function checkNewPage (data) {
+    if (data[0]) {
+        document.getElementById('next').disabled = false;
+        return true;
+    } else {
+        document.getElementById('next').disabled = true;
+        return false;
+    }
+}
+
+function showNewPage (data) {
+    for (var i = 0; i < 10; i++) {
+        if (data[i]) {
+            if (i == 0) {
+                $('#list').empty();
+            }
+            var ref = document.createElement('a');
+            ref.setAttribute('href','/view?id=' + data[i].id);
+            ref.innerHTML = "Заявление от "+(data[i].send_date);
+            $('#list').append(ref);
+        } else {
+            document.getElementById('next').disabled = true;
+            return false;
+        }
+    }
+    downloadNewPage(1);
+    return true;
+}
+
+function downloadNewPage(onlyCheck = 0) {
     $.ajax({
         url: '/lk',
         type: 'post',
         enctype: 'utf-8',
         data: {
-            'page': 0, // ?
+            'page': currPage + onlyCheck,
         },
         success: function (data, status) {
-            for (var i = 0; i < 10; i++) {
-                if (data[i]) {
-                    var ref = document.createElement('a');
-                    ref.setAttribute('href','/view?id=' + data[i].id);
-                    ref.innerHTML = "Заявление"+(i+1);
-                    $('#references').append(ref);
+            if (onlyCheck) {
+                checkNewPage(data);
+            } else {
+                if (currPage == 0) {
+                    document.getElementById('prev').disabled = true;
                 } else {
-                    return false;
+                    document.getElementById('prev').disabled = false;
                 }
+                showNewPage(data);
             }
         },
         error: function (xhr, textStatus, errorThrown)  {
@@ -97,7 +142,7 @@ function downloadNewPage() {
 }
 
 $(document).ready(function() {
-        setFields();
+        setData();
         downloadNewPage();
     }
 );
