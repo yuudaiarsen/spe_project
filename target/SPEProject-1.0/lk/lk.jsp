@@ -11,22 +11,22 @@
             <div class="information">
                 <form id="form">
                     <div class="firstName">
-                        <label for="firstName_field">Имя:</label><input required type="text" pattern="[A-Za-zА-Яа-я]+" id="firstName_field" value="${account.firstName}">
+                        <label for="first_name">Имя:</label><input required type="text" pattern="[A-Za-zА-Яа-я]+" id="first_name" value="${account.firstName}">
                     </div>
                     <div class="lastName">
-                        <label for="lastName_field">Фамилия:</label><input required type="text" pattern="[A-Za-zА-Яа-я]+" id="lastName_field" value="${account.lastName}">
+                        <label for="last_name">Фамилия:</label><input required type="text" pattern="[A-Za-zА-Яа-я]+" id="last_name" value="${account.lastName}">
                     </div>
                     <div class="midName">
-                        <label for="midName_field">Отчество:</label><input required type="text" pattern="[A-Za-zА-Яа-я]+" id="midName_field" value="${account.midName}">
+                        <label for="mid_name">Отчество:</label><input required type="text" pattern="[A-Za-zА-Яа-я]+" id="mid_name" value="${account.midName}">
                     </div>
                     <div class="phone">
-                        <label for="phone_field">Номер телефона:</label><input type="tel" pattern="[0-9]{0,12}" id="phone_field" value="${account.phone}">
+                        <label for="phone">Номер телефона:</label><input type="tel" pattern="[0-9]{0,12}" id="phone" value="${account.phone}">
                     </div>
                     <div class="email">
-                        <label for="email_field">Email:</label><input type="text" disabled="disabled" id="email_field" value="${account.email}">
+                        <label for="email">Email:</label><input type="text" disabled="disabled" id="email" value="${account.email}">
                     </div>
                     <div class="regDate">
-                        <label for="regDate_field">Дата регистрации:</label><input disabled="disabled" type="text" id="regDate_field" value="${account.regDate}">
+                        <label for="reg_date">Дата регистрации:</label><input disabled="disabled" type="text" id="reg_date" value="${account.regDate}">
                     </div>
                     <div class="buttons">
                         <input type="submit" id="submit_button" value="Сохранить">

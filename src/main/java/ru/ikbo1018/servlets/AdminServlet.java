@@ -72,7 +72,7 @@ public class AdminServlet extends HttpServlet {
                 }
 
                 String action = req.getParameter("action");
-
+                System.out.println(action);
                 if(action == null)
                 {
                     resp.sendError(400);
@@ -94,6 +94,8 @@ public class AdminServlet extends HttpServlet {
                             resp.sendError(400);
                             return;
                         }
+                        //System.out.println(Integer.toString(findAcc.getId()));
+                        //System.out.println(findAcc.getFirstName());
                         result.put("id", Integer.toString(findAcc.getId()));
                         result.put("first_name", findAcc.getFirstName());
                         result.put("last_name", findAcc.getLastName());

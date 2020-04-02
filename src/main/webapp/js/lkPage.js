@@ -1,7 +1,6 @@
 const form = document.getElementById('form');
 var elements = form.elements;
 var currPage = 0;
-form.addEventListener('reset', onReset);
 form.addEventListener('submit', onSubmit);
 
 data = [];
@@ -43,10 +42,6 @@ function showError(message) {
     $("#error_field").fadeOut(2000);
 }
 
-function onReset(event) {
-    setFields();
-    event.preventDefault();
-}
 
 function onSubmit(event) {
     for (var i = 0; i < 6; i++) {

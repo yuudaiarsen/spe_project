@@ -99,6 +99,7 @@ public class LkServlet extends HttpServlet {
                 catch (Exception e)
                 {
                     resp.sendError(503);
+                    //e.printStackTrace();
                 }
             }
 
@@ -149,13 +150,13 @@ public class LkServlet extends HttpServlet {
             }
             else if(field.equals("phone"))
             {
-                if(data.length() < 10 || data.length() > 20)
+                if((data.length() < 10 || data.length() > 20) && data.length() > 0)
                 {
                     result.put("error", "Длина поля должна быть от 10 до 20");
                     resp.getWriter().print(new Gson().toJson(result));
                     return;
                 }
-                else if(!checkPhone.matcher(data).matches())
+                else if(data.length() > 0 && !checkPhone.matcher(data).matches())
                 {
                     result.put("error", "Поле может содержать только цифры и знак +");
                     resp.getWriter().print(new Gson().toJson(result));
@@ -168,7 +169,7 @@ public class LkServlet extends HttpServlet {
             }catch (SQLException e)
             {
                 resp.sendError(503);
-                //e.printStackTrace();
+                e.printStackTrace();
             }
             result.put("message", "Поле успешно изменено");
             resp.getWriter().print(new Gson().toJson(result));
